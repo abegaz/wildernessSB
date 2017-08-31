@@ -1,1 +1,14 @@
 
+Functional
+All data collected will be stored in a database, separated by chronology.
+
+Collected data will be sent to the central data management system.
+
+Weather stations will be connected and surveyed by satellite.
+
+Weather stations will collect real-time temperature, rainfall, wind speed/direction, and sunshine.
+
+Nonfunctional
+Weather stations will upload regular reports daily for maintenance.
+
+All measurements will use metric and imperial systems interchangeably.
