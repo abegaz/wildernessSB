@@ -8,7 +8,19 @@ Weather stations will be connected and surveyed by satellite.
 
 Weather stations will collect real-time temperature, rainfall, wind speed/direction, and sunshine.
 
+All weather recording instruments will be working as intended to avoid obtaining invalid data.
+
+Will have a secure database that only authorized users can access.
+
+
+
+
+
 Nonfunctional
 Weather stations will upload regular reports daily for maintenance.
 
 All measurements will use metric and imperial systems interchangeably.
+
+Format reports in a convenient manner for scientific use.
+
+Any disfunctional weather recording instruments will be reported to proper authorities.
