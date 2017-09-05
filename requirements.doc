@@ -12,7 +12,9 @@ All weather recording instruments will be working as intended to avoid obtaining
 
 Will have a secure database that only authorized users can access.
 
-Data can show how the data has an impact on the weather
+Data can show how the data has an impact on the weather.
+
+The system will be abe to detect when instruments are reporting impossible values (or reporting nothing).
 
 
 
@@ -24,3 +26,7 @@ All measurements will use metric and imperial systems interchangeably.
 Format reports in a convenient manner for scientific use.
 
 Any disfunctional weather recording instruments will be reported to proper authorities.
+
+The system will be able to archive data for the long-term (multiple decades).
+
+
