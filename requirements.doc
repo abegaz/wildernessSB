@@ -16,6 +16,10 @@ Data (temperature, rainfall, wind, sunshine) can forecast any possibility of sev
 
 The system will be abe to detect when instruments are reporting impossible values (or reporting nothing).
 
+The software will be written in Java.
+
+The system will register new government wilderness officials.
+
 
 
 Nonfunctional
