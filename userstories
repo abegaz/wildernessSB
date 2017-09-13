@@ -1,0 +1,27 @@
+User Stories:
+
+1.As a Researcher,
+I want to organize data conveniently,
+so that I can more easily study weather patterns.
+
+Criteria:
+*The data will be formatted chronologically.
+*The data will be formatted to be easy-to-read by administrators and any 3rd parties.
+
+
+
+2.As a Station Operator,
+I want to be able to monitor the status of recording equipment,
+so that the problem can be fixed to avoid invalid data.
+
+Criteria:
+*The system will notifty the administrator of faulty equipment.
+*The system will allow the administrator to mark certain data as invalid.
+
+
+3.As a Student,
+I want to view the data collected,
+so that I can use it for a project.
+
+Criteria:
+*Formatted data may be released to the public at the government's request.
