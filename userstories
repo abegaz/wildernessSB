@@ -17,7 +17,7 @@ so that the problem can be fixed to avoid invalid data.
 Criteria:
 *The system will notifty the administrator of faulty equipment.
 *The system will allow the administrator to mark certain data as invalid.
-
+*The system will 
 
 3.As a Student,
 I want to view the data collected,
@@ -25,3 +25,14 @@ so that I can use it for a project.
 
 Criteria:
 *Formatted data may be released to the public at the government's request.
+*If released, outside viewers cannot change data or have most of the options available to administrative users.
+
+4.As an Administrator,
+I want to have complete access to the database,
+so that I change/delete/copy data.
+
+Criteria:
+*The system will allow administrators to have full access to the database.
+*Only administrators will be allowed access to the database.
+*Any non-administrator access to the database will be reported.
+
