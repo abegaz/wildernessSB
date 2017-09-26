@@ -1,1 +1,21 @@
 Client Server relationship
+Weather Subsystems:
+  Log in: Only administrators and weather station operators may log into the subsystems.
+  
+  Weather Pattern Home Screen: Once logged in, the user will be redirected to a home page which has multiple features.
+    -This screen will act mostly as a hub to access weather stations connected to the database.
+    -The home page will display aggregates of the data collected by all stations for a user-defined period of time. (Wind speed, direction, ground
+    temp. air temp., barometric pressure, rainfall.) 
+    -The home page will display a list of weather stations. (Arranged by Id or name.)
+    -The home page will display an announcement list, formatted to give attention to specific station systems. (Ex: Weather station 1:
+    Invalid data entry. or Weather station 5: Unresponsive equipment.)
+    
+ Weather Station Screen:
+    - This page will list the wind speed, direction, ground temp. air temp., barometric pressure, and rainfall collected 
+    by the station for a user-defined period of time.
+    -This page will list primary identifiers of the station: station name, ID, coordinates or address, date operational.
+    - This page will have an equipment list, which will display the equipment name, date operational, and a history of past reports.
+    (This data will be taken from the station maintenance system)
+    
+  
+
