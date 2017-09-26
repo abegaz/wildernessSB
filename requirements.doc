@@ -20,6 +20,38 @@ The software will be written in Java.
 
 The system will register new government wilderness officials.
 
+Be able to collect data from many different stations
+
+Be able to collect different kinds of data including
+
+	Temperature
+
+	Barometric pressure
+
+	Hours of sunshine per day
+
+	Amount of rainfall
+
+	Speed of wind
+
+	Direction of wind
+
+Be able to transmit data to data management system
+
+Create a system that collects all of the data collected from the stations
+
+Create a system that can process and analyze the data
+
+Create a system that can archive the data
+
+Create a system that can communicate by satellite with the stations
+
+Create a system that can monitor the function of all of the stations
+
+Create a system that can provide reports of any problems detected
+
+Have different levels of security clearance
+
 
 
 Nonfunctional
@@ -32,5 +64,10 @@ Format reports in a convenient manner for scientific use.
 Any disfunctional weather recording instruments will be reported to proper authorities.
 
 The system will be able to archive data for the long-term (multiple decades).
+
+All of the programs be written in Java
+
+Have an interface that is usable by non-programmers
+
 
 
