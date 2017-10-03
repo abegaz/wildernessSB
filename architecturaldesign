@@ -17,5 +17,4 @@ Weather Subsystems:
     - This page will have an equipment list, which will display the equipment name, date operational, and a history of past reports.
     (This data will be taken from the station maintenance system)
     
-  
-
+  You should represent this in the form of digram (both the physical and logial components) 
