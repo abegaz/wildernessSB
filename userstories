@@ -36,4 +36,28 @@ Criteria:
 *Only administrators will be allowed access to the database.
 *Any non-administrator access to the database will be reported.
 
+5. As a researcher,
+I want to be able to recieve accurrate real time readings from many places at once,
+so that I can review data for a large area at one time.
+
+Criteria:
+*Stations will collect accurrate real time readings.
+*All stations will be centrally connected via satellite.
+
+6. As a historian,
+I want to be able to view data from many years ago,
+so I can see if there are changes over long periods of time.
+
+Criteria:
+*Database will maintain data for extended periods of time.
+*Reports are formatted for scientific use.
+*Measurements will be taken in metric.
+
+7. As a maintenance worker,
+I want to be able to monitor and recieve reports when equipment is faulty,
+so that all equipment works properly.
+
+Criteria:
+*Stations upload regular status reports.
+*If a piece of equipment needs repair a notification is sent to the central hub.
 You need to add more user stories 
