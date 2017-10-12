@@ -1,0 +1,46 @@
+CREATE TABLE `STATION_DETAIL` (
+	`stationID` INT NOT NULL AUTO_INCREMENT,
+	`wind_speed` varchar NOT NULL,
+	`wind_direction` varchar NOT NULL,
+	`ground_temp` varchar NOT NULL,
+	`air_temp` varchar NOT NULL,
+	`barometric_pressure` varchar NOT NULL,
+	`rainfall` varchar NOT NULL,
+	PRIMARY KEY (`stationID`)
+);
+
+CREATE TABLE `STATION` (
+	`station_id` INT NOT NULL AUTO_INCREMENT,
+	`location` varchar NOT NULL,
+	`date_added` DATETIME,
+	PRIMARY KEY (`station_id`)
+);
+
+CREATE TABLE `ADMINISTRATOR` (
+	`first_name` varchar(15) NOT NULL,
+	`last_name` varchar(15) NOT NULL,
+	`date_started` DATETIME NOT NULL,
+	`admin_id` INT NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (`admin_id`)
+);
+
+CREATE TABLE `USER` (
+	`admin_id` INT NOT NULL AUTO_INCREMENT,
+	`email_address` varchar(50) NOT NULL UNIQUE,
+	`password` varchar(50) NOT NULL UNIQUE,
+	PRIMARY KEY (`admin_id`)
+);
+
+CREATE TABLE `user_station` (
+	`station_id` BINARY NOT NULL AUTO_INCREMENT,
+	`admin_id` INT NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (`station_id`)
+);
+
+ALTER TABLE `STATION_DETAIL` ADD CONSTRAINT `STATION_DETAIL_fk0` FOREIGN KEY (`stationID`) REFERENCES `STATION`(`station_id`);
+
+ALTER TABLE `USER` ADD CONSTRAINT `USER_fk0` FOREIGN KEY (`admin_id`) REFERENCES `ADMINISTRATOR`(`admin_id`);
+
+ALTER TABLE `user_station` ADD CONSTRAINT `user_station_fk0` FOREIGN KEY (`station_id`) REFERENCES `STATION`(`station_id`);
+
+ALTER TABLE `user_station` ADD CONSTRAINT `user_station_fk1` FOREIGN KEY (`admin_id`) REFERENCES `USER`(`admin_id`);
