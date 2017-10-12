@@ -1,3 +1,10 @@
+This is some SQL I generated to further create our DB design, creating both a table for administrators (as employees) 
+and weather stations, station_detail calls the station_id and holds actual readings, and the user table houses email/password for
+authentication.
+
+user_station table branches between logging in and access to the station for N-N relationship. Feel free to add/take.
+
+
 CREATE TABLE `STATION_DETAIL` (
 	`stationID` INT NOT NULL AUTO_INCREMENT,
 	`wind_speed` varchar NOT NULL,
