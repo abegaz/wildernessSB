@@ -77,3 +77,16 @@ so that new employees or existing employees can have access to the system.
 Criteria:
 * New users can be registered into the system, only with the existence of another admin_Id. (Refer to database design)
 
+10. As an administrator,
+I want to be able to remove users from the system,
+so that employees who quit or are fired can no longer access the system.
+
+Criteria:
+* Existing users can be removed from the system, only with the existence of another admin_Id. (Refer to database design)
+
+As an air-traffic controller,
+I want a real-time, visual representation of inclement weather,
+so that I can delay or re-route flights as needed
+
+Criteria:
+*Applicable data is exported to a "heat map" that receives updates in real time.
