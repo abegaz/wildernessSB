@@ -1,0 +1,22 @@
+Product Backlog
+-----------------
+1. Create base UI (barebones at the moment)
+2. Create database guided by the database design file in the repo.
+3. Create Log-In system.
+4. Implement database for log-ins.
+5. Create UI for registering new users.
+6. Create UI that provides an aggregate of all data collected. (24hr period) This page will be referenced as the "Main page" for convenience
+7. Provide a service that converts Imperial units to metric.
+8. Create a UI that displays a list of weather stations.
+9. When accessing particular weather stations, weather data should be displayed for that particular station, use stationID to find.
+10. Notifications UI.
+11.
+
+Tasks Not Started
+-----------------
+
+Tasks in Progress
+-----------------
+
+Tasks Completed
+-----------------
