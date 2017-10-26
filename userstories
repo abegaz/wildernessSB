@@ -7,6 +7,7 @@ so that I can more easily study weather patterns.
 Criteria:
 *The data will be formatted chronologically.
 *The data will be formatted to be easy-to-read by administrators and any 3rd parties.
+Story Points: 1
 
 
 
@@ -17,6 +18,7 @@ so that the problem can be fixed to avoid invalid data.
 Criteria:
 *The system will notifty the administrator of faulty equipment.
 *The system will allow the administrator to mark certain data as invalid.
+Story Points: 5
 
 
 3.As a Student,
@@ -26,6 +28,7 @@ so that I can use it for a project.
 Criteria:
 *Formatted data may be released to the public at the government's request.
 *If released, outside viewers cannot change data or have most of the options available to administrative users.
+Story Points: 1
 
 4.As an Administrator,
 I want to have complete access to the database,
@@ -35,6 +38,7 @@ Criteria:
 *The system will allow administrators to have full access to the database.
 *Only administrators will be allowed access to the database.
 *Any non-administrator access to the database will be reported.
+Story Points: 1
 
 5. As a researcher,
 I want to be able to recieve accurrate real time readings from many places at once,
@@ -43,6 +47,7 @@ so that I can review data for a large area at one time.
 Criteria:
 *Stations will collect accurrate real time readings.
 *All stations will be centrally connected via satellite.
+Story Points: 5
 
 6. As a historian,
 I want to be able to view data from many years ago,
@@ -52,6 +57,7 @@ Criteria:
 *Database will maintain data for extended periods of time.
 *Reports are formatted for scientific use.
 *Measurements will be taken in metric.
+Story Points: 3
 
 7. As a maintenance worker,
 I want to be able to monitor and recieve reports when equipment is faulty,
@@ -60,7 +66,7 @@ so that all equipment works properly.
 Criteria:
 *Stations upload regular status reports.
 *If a piece of equipment needs repair a notification is sent to the central hub.
-You need to add more user stories 
+Story Points: 5
 
 8. As a scientist,
 I want to be able to view data in the metric system.
@@ -69,6 +75,7 @@ So data can be more accesible.
 Criteria:
 *All applicable data can be converted without formatting issues.
 *Any changes to data shouldn't effect the database or system functions.
+Story Points: 3
 
 9. As an administrator,
 I want to be able to register new users into the system,
@@ -76,6 +83,7 @@ so that new employees or existing employees can have access to the system.
 
 Criteria:
 * New users can be registered into the system, only with the existence of another admin_Id. (Refer to database design)
+Story Points 3
 
 10. As an administrator,
 I want to be able to remove users from the system,
@@ -83,6 +91,7 @@ so that employees who quit or are fired can no longer access the system.
 
 Criteria:
 * Existing users can be removed from the system, only with the existence of another admin_Id. (Refer to database design)
+Story Points: 3
 
 As an air-traffic controller,
 I want a real-time, visual representation of inclement weather,
@@ -90,3 +99,4 @@ so that I can delay or re-route flights as needed
 
 Criteria:
 *Applicable data is exported to a "heat map" that receives updates in real time.
+Story Points: 5
