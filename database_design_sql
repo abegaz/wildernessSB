@@ -172,7 +172,7 @@ COMMIT;
 
 -- -----------------------------------------------------
 -- Data for table `wilderness`.`user_station`
--- -----------------------------------------------------
+-- ------------------------------------------------------
 START TRANSACTION;
 USE `wilderness`;
 INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (1, 1);
