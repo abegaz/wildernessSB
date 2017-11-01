@@ -1,52 +1,209 @@
-This is some SQL I generated to further create our DB design, creating both a table for administrators (as employees) 
-and weather stations, station_detail calls the station_id and holds actual readings, and the user table houses email/password for
-authentication.
+-- MySQL Workbench Forward Engineering
 
-user_station table branches between logging in and access to the station for N-M relationship. Feel free to add/take.
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE TABLE `STATION_DETAIL` (
-	`stationID` INT NOT NULL AUTO_INCREMENT,
-	`wind_speed` varchar NOT NULL,
-	`wind_direction` varchar NOT NULL,
-	`ground_temp` varchar NOT NULL,
-	`air_temp` varchar NOT NULL,
-	`barometric_pressure` varchar NOT NULL,
-	`rainfall` varchar NOT NULL,
-	PRIMARY KEY (`stationID`)
-);
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema wilderness
+-- -----------------------------------------------------
 
-CREATE TABLE `STATION` (
-	`station_id` INT NOT NULL AUTO_INCREMENT,
-	`location` varchar NOT NULL,
-	`date_added` DATETIME,
-	PRIMARY KEY (`station_id`)
-);
+-- -----------------------------------------------------
+-- Schema wilderness
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `wilderness` DEFAULT CHARACTER SET latin1 ;
+USE `wilderness` ;
 
-CREATE TABLE `ADMINISTRATOR` (
-	`first_name` varchar(15) NOT NULL,
-	`last_name` varchar(15) NOT NULL,
-	`date_started` DATETIME NOT NULL,
-	`admin_id` INT NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY (`admin_id`)
-);
+-- -----------------------------------------------------
+-- Table `wilderness`.`employee`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `wilderness`.`employee` (
+  `employee_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `employee_num` INT(11) NOT NULL,
+  `first_name` VARCHAR(15) NOT NULL,
+  `last_name` VARCHAR(15) NOT NULL,
+  `date_started` DATE NOT NULL,
+  PRIMARY KEY (`employee_id`, `employee_num`),
+  UNIQUE INDEX `employee_id_UNIQUE` (`employee_id` ASC),
+  UNIQUE INDEX `employee_num_UNIQUE` (`employee_num` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = latin1;
 
-CREATE TABLE `USER` (
-	`admin_id` INT NOT NULL AUTO_INCREMENT,
-	`email_address` varchar(50) NOT NULL UNIQUE,
-	`password` varchar(50) NOT NULL UNIQUE,
-	PRIMARY KEY (`admin_id`)
-);
 
-CREATE TABLE `user_station` (
-	`station_id` BINARY NOT NULL AUTO_INCREMENT,
-	`admin_id` INT NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY (`station_id`)
-);
+-- -----------------------------------------------------
+-- Table `wilderness`.`station`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `wilderness`.`station` (
+  `station_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `location` VARCHAR(45) NULL DEFAULT NULL,
+  `date_added` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`station_id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = latin1;
 
-ALTER TABLE `STATION_DETAIL` ADD CONSTRAINT `STATION_DETAIL_fk0` FOREIGN KEY (`stationID`) REFERENCES `STATION`(`station_id`);
 
-ALTER TABLE `USER` ADD CONSTRAINT `USER_fk0` FOREIGN KEY (`admin_id`) REFERENCES `ADMINISTRATOR`(`admin_id`);
+-- -----------------------------------------------------
+-- Table `wilderness`.`station_detail`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `wilderness`.`station_detail` (
+  `stationID` INT(11) NOT NULL AUTO_INCREMENT,
+  `wind_speed` VARCHAR(45) NULL DEFAULT NULL,
+  `wind_direction` VARCHAR(45) NULL DEFAULT NULL,
+  `ground_temp` VARCHAR(45) NULL DEFAULT NULL,
+  `air_temp` VARCHAR(45) NULL DEFAULT NULL,
+  `barometric_pressure` VARCHAR(45) NULL DEFAULT NULL,
+  `rainfall` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`stationID`),
+  CONSTRAINT `stationid`
+    FOREIGN KEY (`stationID`)
+    REFERENCES `wilderness`.`station` (`station_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = latin1;
 
-ALTER TABLE `user_station` ADD CONSTRAINT `user_station_fk0` FOREIGN KEY (`station_id`) REFERENCES `STATION`(`station_id`);
 
-ALTER TABLE `user_station` ADD CONSTRAINT `user_station_fk1` FOREIGN KEY (`admin_id`) REFERENCES `USER`(`admin_id`);
+-- -----------------------------------------------------
+-- Table `wilderness`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `wilderness`.`user` (
+  `user_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `emp_num` INT(11) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(12) NOT NULL,
+  PRIMARY KEY (`user_id`, `emp_num`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
+  UNIQUE INDEX `emp_num_UNIQUE` (`emp_num` ASC),
+  INDEX `emp_num_idx` (`emp_num` ASC),
+  CONSTRAINT `employee_number`
+    FOREIGN KEY (`emp_num`)
+    REFERENCES `wilderness`.`employee` (`employee_num`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `wilderness`.`user_station`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `wilderness`.`user_station` (
+  `station_id` INT(11) NOT NULL,
+  `user_id` INT(11) NOT NULL,
+  PRIMARY KEY (`station_id`, `user_id`),
+  INDEX `user_id_idx` (`user_id` ASC),
+  CONSTRAINT `station_id`
+    FOREIGN KEY (`station_id`)
+    REFERENCES `wilderness`.`station` (`station_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `user_id`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `wilderness`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `wilderness`.`employee`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `wilderness`;
+INSERT INTO `wilderness`.`employee` (`employee_id`, `employee_num`, `first_name`, `last_name`, `date_started`) VALUES (1, 10000, 'Mark', 'Hamill', '1977-05-25');
+INSERT INTO `wilderness`.`employee` (`employee_id`, `employee_num`, `first_name`, `last_name`, `date_started`) VALUES (2, 11223, 'Dakota', 'Nation', '2017-11-01');
+INSERT INTO `wilderness`.`employee` (`employee_id`, `employee_num`, `first_name`, `last_name`, `date_started`) VALUES (3, 19932, 'Brad', 'Majors', '1975-09-25');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `wilderness`.`station`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `wilderness`;
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (1, 'New York', '2011-04-30');
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (2, 'Idaho', '2009-10-31');
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (3, 'Mississippi', '2007-10-01');
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (4, 'Tennessee', '2014-06-02');
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (5, 'Washington', '2014-06-02');
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (6, 'California', '2006-03-13');
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (7, 'California', '2013-07-02');
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (8, 'Texas', '2013-12-04');
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (9, 'Alabama', '2009-02-13');
+INSERT INTO `wilderness`.`station` (`station_id`, `location`, `date_added`) VALUES (10, 'Georgia', '2016-05-21');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `wilderness`.`station_detail`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `wilderness`;
+INSERT INTO `wilderness`.`station_detail` (`stationID`, `wind_speed`, `wind_direction`, `ground_temp`, `air_temp`, `barometric_pressure`, `rainfall`) VALUES (10, '3.4', '90.4', '10', '19', '769.3', '0');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `wilderness`.`user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `wilderness`;
+INSERT INTO `wilderness`.`user` (`user_id`, `emp_num`, `email`, `password`) VALUES (1, 10000, 'mark.hamill@starwars.com', 'daddyissues6');
+INSERT INTO `wilderness`.`user` (`user_id`, `emp_num`, `email`, `password`) VALUES (2, 11223, 'djnati6387@ung.edu', 'password1');
+INSERT INTO `wilderness`.`user` (`user_id`, `emp_num`, `email`, `password`) VALUES (3, 19932, 'brad.majors@rockypictures.com', 'shocktreatme');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `wilderness`.`user_station`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `wilderness`;
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (1, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (2, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (3, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (4, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (5, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (6, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (7, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (8, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (9, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (10, 1);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (1, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (2, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (3, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (4, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (5, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (6, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (7, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (8, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (9, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (10, 2);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (1, 3);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (2, 3);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (3, 3);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (4, 3);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (5, 3);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (6, 3);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (7, 3);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (8, 3);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (9, 3);
+INSERT INTO `wilderness`.`user_station` (`station_id`, `user_id`) VALUES (10, 3);
+
+COMMIT;
