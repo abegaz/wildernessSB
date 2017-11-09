@@ -1,7 +1,7 @@
 package com.Wilderness.model;
 
 public class Employee {
-	private String employeeId;
+	protected String employeeId;
 	protected String employeeNum;
 	protected String firstName;
 	protected String lastName;

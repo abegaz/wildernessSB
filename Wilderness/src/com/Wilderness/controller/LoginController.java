@@ -34,10 +34,7 @@ public class LoginController {
 	//public final void onActionProperty() throws SQLException{
 	//	PreparedStatement ps = WildernessDBConfig.getConnection().prepareStatement("SELECT * FROM user WHERE email = ? and password = ?");
 	//}
-	public void initialize() {
-		
-	}
-    public final void onLoginButtonPushed(ActionEvent event) {
+	    public void onLoginButtonPushed(ActionEvent event) {
     	User user = new User(txtUserNameLogin.getText(),txtPasswordLogin.getText());
     	try{
 		if(user.validLogin(txtUserNameLogin.getText(), txtPasswordLogin.getText())) {
@@ -47,15 +44,25 @@ public class LoginController {
 			else {
 				lblUserNameFeedbackLogin.setText("Incorrect user name or password");
 			}
-			
 		}
     	catch(Exception a) {
     		lblUserNameFeedbackLogin.setText("Error");
-    	}
-    		
-    		
-    	
-		
+    	}	
     }
+	    public void onRegisterButtonPushed(ActionEvent event) {
+	    	User user = new User(txtAdminIDRegister.getText(), txtUserNameRegister.getText(), txtPasswordRegister.getText());
+	    		try {
+	    			if(user.validRegister(txtAdminIDRegister.getText(), txtUserNameRegister.getText(), txtPasswordRegister.getText())) {
+	    				lblAdminIDFeedbackRegister.setText("Successful registration");
+	    			}
+	    			else {
+	    				lblAdminIDFeedbackRegister.setText("Information already in use");
+	    			}
+	    		}
+	    		catch(Exception a) {
+	    			lblAdminIDFeedbackRegister.setText("Error");
+	    		}
+	    	}
+
 
 }
