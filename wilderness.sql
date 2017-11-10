@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2017 at 07:50 PM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: Nov 10, 2017 at 04:57 AM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,13 +28,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `employee`
 --
 
-CREATE TABLE IF NOT EXISTS `employee` (
+CREATE TABLE `employee` (
   `employee_id` int(11) NOT NULL,
   `employee_num` int(11) NOT NULL,
   `first_name` varchar(15) NOT NULL,
   `last_name` varchar(15) NOT NULL,
   `date_started` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
@@ -49,11 +51,11 @@ INSERT INTO `employee` (`employee_id`, `employee_num`, `first_name`, `last_name`
 -- Table structure for table `station`
 --
 
-CREATE TABLE IF NOT EXISTS `station` (
+CREATE TABLE `station` (
   `station_id` int(11) NOT NULL,
   `location` varchar(45) DEFAULT NULL,
   `date_added` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `station`
@@ -77,7 +79,7 @@ INSERT INTO `station` (`station_id`, `location`, `date_added`) VALUES
 -- Table structure for table `station_detail`
 --
 
-CREATE TABLE IF NOT EXISTS `station_detail` (
+CREATE TABLE `station_detail` (
   `stationID` int(11) NOT NULL,
   `wind_speed` varchar(45) DEFAULT NULL,
   `wind_direction` varchar(45) DEFAULT NULL,
@@ -85,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `station_detail` (
   `air_temp` varchar(45) DEFAULT NULL,
   `barometric_pressure` varchar(45) DEFAULT NULL,
   `rainfall` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `station_detail`
@@ -97,15 +99,36 @@ INSERT INTO `station_detail` (`stationID`, `wind_speed`, `wind_direction`, `grou
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `Name` varchar(45) NOT NULL,
+  `Student_number` int(11) NOT NULL,
+  `Class` int(11) DEFAULT NULL,
+  `Major` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`Name`, `Student_number`, `Class`, `Major`) VALUES
+('Brown', 8, 4, 'CS'),
+('Smith', 17, 1, 'CS');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
-  `emp_num` int(11) NOT NULL,
+  `emp_num` int(11) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(12) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
@@ -114,7 +137,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`user_id`, `emp_num`, `email`, `password`) VALUES
 (1, 10000, 'mark.hamill@starwars.com', 'daddyissues6'),
 (2, 11223, 'djnati6387@ung.edu', 'password1'),
-(3, 19932, 'brad.majors@rockypictures.com', 'shocktreatme');
+(3, 19932, 'brad.majors@rockypictures.com', 'shocktreatme'),
+(4, NULL, 'test@test.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -122,7 +146,7 @@ INSERT INTO `user` (`user_id`, `emp_num`, `email`, `password`) VALUES
 -- Table structure for table `user_station`
 --
 
-CREATE TABLE IF NOT EXISTS `user_station` (
+CREATE TABLE `user_station` (
   `station_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -141,27 +165,7 @@ INSERT INTO `user_station` (`station_id`, `user_id`) VALUES
 (7, 1),
 (8, 1),
 (9, 1),
-(10, 1),
-(1, 2),
-(2, 2),
-(3, 2),
-(4, 2),
-(5, 2),
-(6, 2),
-(7, 2),
-(8, 2),
-(9, 2),
-(10, 2),
-(1, 3),
-(2, 3),
-(3, 3),
-(4, 3),
-(5, 3),
-(6, 3),
-(7, 3),
-(8, 3),
-(9, 3),
-(10, 3);
+(10, 1);
 
 --
 -- Indexes for dumped tables
@@ -188,12 +192,17 @@ ALTER TABLE `station_detail`
   ADD PRIMARY KEY (`stationID`);
 
 --
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`Student_number`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`,`emp_num`),
+  ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email_UNIQUE` (`email`),
-  ADD UNIQUE KEY `emp_num_UNIQUE` (`emp_num`),
   ADD KEY `emp_num_idx` (`emp_num`);
 
 --
@@ -211,22 +220,26 @@ ALTER TABLE `user_station`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `station`
 --
 ALTER TABLE `station`
-  MODIFY `station_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `station_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `station_detail`
 --
 ALTER TABLE `station_detail`
-  MODIFY `stationID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `stationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- Constraints for dumped tables
 --
@@ -249,6 +262,7 @@ ALTER TABLE `user`
 ALTER TABLE `user_station`
   ADD CONSTRAINT `station_id` FOREIGN KEY (`station_id`) REFERENCES `station` (`station_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
