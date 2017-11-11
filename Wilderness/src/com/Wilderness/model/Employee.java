@@ -1,5 +1,10 @@
 package com.Wilderness.model;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import application.WildernessDBConfig;
+
 public class Employee {
 	protected String employeeId;
 	protected String employeeNum;
@@ -19,7 +24,36 @@ public class Employee {
 		this.employeeId = employeeId;
 		this.employeeNum = employeeNum;
 	}
+	public Employee(String employeeNum) {
+		this.employeeNum = employeeNum;
+	}
 	public Employee() {
+		
+	}
+	public boolean isUniqueEmpNum(String employeeNum) {
+		PreparedStatement empNum;
+		PreparedStatement insertEmpNum;
+		ResultSet rs;
+		try {
+			empNum = WildernessDBConfig.getConnection().prepareStatement("select employee_num from employee where employee_num = ?");
+			insertEmpNum = WildernessDBConfig.getConnection().prepareStatement("INSERT INTO user (emp_num) SELECT employee_num FROM employee where employee_num = ?");
+			empNum.setString(1, employeeNum);
+			insertEmpNum.setString(1, employeeNum);
+			rs = empNum.executeQuery();
+		
+		if(rs.next()||!rs.next()) {
+			insertEmpNum.executeUpdate();
+			return true;
+		}
+		else {
+			return false;
+		}
+		}
+		catch(Exception a) {
+			a.printStackTrace();
+			return false;
+		}
+		
 		
 	}
 	

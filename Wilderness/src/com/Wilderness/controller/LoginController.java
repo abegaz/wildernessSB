@@ -50,9 +50,10 @@ public class LoginController {
     	}	
     }
 	    public void onRegisterButtonPushed(ActionEvent event) {
-	    	User user = new User(txtAdminIDRegister.getText(), txtUserNameRegister.getText(), txtPasswordRegister.getText());
+	    	User user = new User(txtUserNameRegister.getText(), txtPasswordRegister.getText());
+	    	User empNum = new User(txtAdminIDRegister.getText());
 	    		try {
-	    			if(user.validRegister(txtAdminIDRegister.getText(), txtUserNameRegister.getText(), txtPasswordRegister.getText())) {
+	    			if(user.validRegister(txtUserNameRegister.getText(), txtPasswordRegister.getText()) && empNum.isUniqueEmpNum(txtAdminIDRegister.getText())) {
 	    				lblAdminIDFeedbackRegister.setText("Successful registration");
 	    			}
 	    			else {
