@@ -26,6 +26,9 @@ public class User extends Employee {
 		this.email = email;
 		this.password = password;
 	}
+	public User(String employeeNum) {
+		this.employeeNum = employeeNum;
+	}
 	public boolean validLogin(String email, String password) {
 		PreparedStatement ps;
 		ResultSet resultSet;
@@ -49,26 +52,24 @@ public class User extends Employee {
 		}
 		
 	}
-	public boolean validRegister(String employeeNum, String email, String password) {
+	public boolean validRegister(String email, String password) {
+		Employee empNum = new Employee(employeeNum);
+		Boolean isEmpNumUnique = empNum.isUniqueEmpNum(employeeNum);
 		PreparedStatement isUnique;
-		//PreparedStatement empNum;
 		ResultSet rs1;
 		PreparedStatement registerUser;
-		//ResultSet rs2;
 		try {
-			isUnique = WildernessDBConfig.getConnection().prepareStatement("select x.employee, y.user from (select employee_num from employee where employee_num = ?) as x, (select * from user where email = ? and password = ?) as y");//select * from user where email = ? and password = ?
+			isUnique = WildernessDBConfig.getConnection().prepareStatement("select * from user where email = ? and password = ?");//select * from user where email = ? and password = ?
 			//empNum = WildernessDBConfig.getConnection().prepareStatement("select employee_num from employee where employee_num = ?");
-			registerUser = WildernessDBConfig.getConnection().prepareStatement("insert into user (emp_num, email, password) values (?,?,?)");
-			registerUser.setString(1, employeeNum);
-			registerUser.setString(2, email);
-			registerUser.setString(3, password);
-			isUnique.setString(1, employeeNum);
-			isUnique.setString(2, email);
-			isUnique.setString(3, password);
+			registerUser = WildernessDBConfig.getConnection().prepareStatement("insert into user (email, password) values (?,?)");
+			registerUser.setString(1, email);
+			registerUser.setString(2, password);
+			isUnique.setString(1, email);
+			isUnique.setString(2, password);
 			//empNum.setString(1, employeeNum);
 			rs1 = isUnique.executeQuery();
 			//rs2 = empNum.executeQuery();
-			if(!rs1.next()) {
+			if(!rs1.next() && isEmpNumUnique) {
 				registerUser.executeUpdate();
 				return true;
 			}
@@ -82,6 +83,7 @@ public class User extends Employee {
 			return false;
 		}
 	}
+	
 	
 	
 	
