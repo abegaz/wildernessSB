@@ -11,6 +11,7 @@ import javafx.beans.property.ObjectPropertyBase;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -30,6 +31,8 @@ public class LoginController {
 	@FXML private Label lblAdminIDFeedbackRegister; // Displays any Admin ID errors when registering.
 	@FXML private Label lblUserNameFeedbackRegister; // Displays any user name errors when registering.
 	@FXML private Label lblPasswordFeedbackRegister; //Displays any password errors when registering.
+	//Text on the temp main page. Will change later if/when we have a real main page.
+	@FXML private TextField mainTxt;
 	
 	//public final void onActionProperty() throws SQLException{
 	//	PreparedStatement ps = WildernessDBConfig.getConnection().prepareStatement("SELECT * FROM user WHERE email = ? and password = ?");
@@ -38,8 +41,8 @@ public class LoginController {
     	User user = new User(txtUserNameLogin.getText(),txtPasswordLogin.getText());
     	try{
 		if(user.validLogin(txtUserNameLogin.getText(), txtPasswordLogin.getText())) {
-			//Will add method that loads main page later.
-			lblUserNameFeedbackLogin.setText("Login Successful");
+			//Should get the scene associated with the textfield
+			mainTxt.getScene().getWindow();
 		}
 			else {
 				lblUserNameFeedbackLogin.setText("Incorrect user name or password");
