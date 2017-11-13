@@ -126,8 +126,8 @@ INSERT INTO `student` (`Name`, `Student_number`, `Class`, `Major`) VALUES
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `emp_num` int(11) DEFAULT NULL,
-  `email` varchar(45) NOT NULL,
-  `password` varchar(12) NOT NULL
+  `email` varchar(45) DEFAULT NULL,
+  `password` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

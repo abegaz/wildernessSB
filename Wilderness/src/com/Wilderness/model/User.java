@@ -54,7 +54,8 @@ public class User extends Employee {
 	}
 	public boolean validRegister(String email, String password) {
 		Employee empNum = new Employee(employeeNum);
-		Boolean isEmpNumUnique = empNum.isUniqueEmpNum(employeeNum);
+		String employeeNum = empNum.getEmployeeNum();
+		//Boolean isEmpNumUnique = empNum.isUniqueEmpNum(employeeNum);
 		PreparedStatement isUnique;
 		ResultSet rs1;
 		PreparedStatement registerUser;
@@ -62,14 +63,14 @@ public class User extends Employee {
 			isUnique = WildernessDBConfig.getConnection().prepareStatement("select * from user where email = ? and password = ?");//select * from user where email = ? and password = ?
 			//empNum = WildernessDBConfig.getConnection().prepareStatement("select employee_num from employee where employee_num = ?");
 			registerUser = WildernessDBConfig.getConnection().prepareStatement("insert into user (email, password) values (?,?)");
-			registerUser.setString(1, email);
-			registerUser.setString(2, password);
 			isUnique.setString(1, email);
 			isUnique.setString(2, password);
 			//empNum.setString(1, employeeNum);
 			rs1 = isUnique.executeQuery();
 			//rs2 = empNum.executeQuery();
-			if(!rs1.next() && isEmpNumUnique) {
+			if(!rs1.next()) {
+				registerUser.setString(1, email);
+				registerUser.setString(2, password);
 				registerUser.executeUpdate();
 				return true;
 			}
