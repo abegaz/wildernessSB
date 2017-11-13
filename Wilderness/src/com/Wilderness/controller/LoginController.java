@@ -1,8 +1,6 @@
 package com.Wilderness.controller;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 
 import com.Wilderness.model.Employee;
 import com.Wilderness.model.User;
@@ -42,7 +40,7 @@ public class LoginController {
 		if(user.validLogin(txtUserNameLogin.getText(), txtPasswordLogin.getText())) {
 			//Will add method that loads main page later.
 			lblUserNameFeedbackLogin.setText("Login Successful");
-			mainTxt.getScene().getWindow();
+//			mainTxt.getScene().getWindow();
 
 		}
 			else {
@@ -57,17 +55,18 @@ public class LoginController {
 	    	User user = new User(txtUserNameRegister.getText(), txtPasswordRegister.getText());
 	    	Employee empNum = new Employee(txtAdminIDRegister.getText());
 	    		try {
-	    			if(user.validRegister(txtUserNameRegister.getText(), txtPasswordRegister.getText()) && empNum.isUniqueEmpNum(txtAdminIDRegister.getText())) {
+	    			if(user.validRegister(empNum, txtUserNameRegister.getText(), txtPasswordRegister.getText()) && Employee.isUniqueEmpNum(txtAdminIDRegister.getText())) {
 	    				lblAdminIDFeedbackRegister.setText("Successful registration");
+//	    				mainTxt.getScene().getWindow();
 	    			}
-	    			else if(user.validRegister(txtUserNameRegister.getText(), txtPasswordRegister.getText()) && !empNum.isUniqueEmpNum(txtAdminIDRegister.getText())){
+	    			else if(user.validRegister(empNum, txtUserNameRegister.getText(), txtPasswordRegister.getText()) && !Employee.isUniqueEmpNum(txtAdminIDRegister.getText())){
 	    				lblAdminIDFeedbackRegister.setText("Admin ID is incorrect");
 	    			}
-	    			else if(!user.validRegister(txtUserNameRegister.getText(), txtPasswordRegister.getText()) && empNum.isUniqueEmpNum(txtAdminIDRegister.getText())) {
+	    			else if(!user.validRegister(empNum, txtUserNameRegister.getText(), txtPasswordRegister.getText()) && Employee.isUniqueEmpNum(txtAdminIDRegister.getText())) {
 	    				lblAdminIDFeedbackRegister.setText("User name or password is already in use");
 	    			}
-	    			else if(!user.validRegister(txtUserNameRegister.getText(), txtPasswordRegister.getText()) && !empNum.isUniqueEmpNum(txtAdminIDRegister.getText())) {
-	    				lblAdminIDFeedbackRegister.setText("Something is wrong");
+	    			else if(!user.validRegister(empNum, txtUserNameRegister.getText(), txtPasswordRegister.getText()) && !Employee.isUniqueEmpNum(txtAdminIDRegister.getText())) {
+	    				lblAdminIDFeedbackRegister.setText("Invalid Admin ID or User name and password are incorrect");
 	    			}
 	    			else {
 	    				lblAdminIDFeedbackRegister.setText("Something is horribly wrong");
@@ -75,6 +74,7 @@ public class LoginController {
 	    			
 	    		}
 	    		catch(Exception a) {
+	    			a.printStackTrace();
 	    			lblAdminIDFeedbackRegister.setText("Error");
 	    		}
 	    	}

@@ -52,9 +52,7 @@ public class User extends Employee {
 		}
 		
 	}
-	public boolean validRegister(String email, String password) {
-		Employee empNum = new Employee(employeeNum);
-		String employeeNum = empNum.getEmployeeNum();
+	public boolean validRegister(Employee empNum, String email, String password) {
 		//Boolean isEmpNumUnique = empNum.isUniqueEmpNum(employeeNum);
 		PreparedStatement isUnique;
 		ResultSet rs1;
@@ -68,7 +66,7 @@ public class User extends Employee {
 			//empNum.setString(1, employeeNum);
 			rs1 = isUnique.executeQuery();
 			//rs2 = empNum.executeQuery();
-			if(!rs1.next()) {
+			if(!rs1.next() && Employee.isUniqueEmpNum(empNum.getEmployeeNum())) {
 				registerUser.setString(1, email);
 				registerUser.setString(2, password);
 				registerUser.executeUpdate();

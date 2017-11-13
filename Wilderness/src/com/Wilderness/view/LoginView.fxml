@@ -15,7 +15,10 @@
                <children>
                   <TextField fx:id="txtUserNameLogin" layoutX="24.0" layoutY="37.0" promptText="User Name" />
                   <TextField fx:id="txtPasswordLogin" layoutX="24.0" layoutY="98.0" promptText="Password" />
-                  <Label fx:id="lblUserNameFeedbackLogin" layoutX="23.0" layoutY="62.0" prefWidth="150.0" />
+                  <Label fx:id="lblUserNameFeedbackLogin" layoutY="62.0" prefHeight="37.0" prefWidth="196.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font></Label>
                   <Label fx:id="lblPasswordFeedbackLogin" layoutX="23.0" layoutY="123.0" prefWidth="150.0" />
                   <Button fx:id="btnLogin" layoutX="75.0" layoutY="159.0" mnemonicParsing="false" onAction="#onLoginButtonPushed" text="Login" />
                </children>
@@ -24,10 +27,13 @@
                <children>
                   <Button fx:id="btnRegisterNewUser" layoutX="41.0" layoutY="176.0" mnemonicParsing="false" onAction="#onRegisterButtonPushed" text="Register New User" />
                   <TextField fx:id="txtAdminIDRegister" layoutX="24.0" layoutY="42.0" promptText="Admin ID" />
-                  <TextField fx:id="txtUserNameRegister" layoutX="24.0" layoutY="85.0" promptText="User Name" />
+                  <TextField fx:id="txtUserNameRegister" layoutX="25.0" layoutY="98.0" promptText="User Name" />
                   <TextField fx:id="txtPasswordRegister" layoutX="24.0" layoutY="133.0" promptText="Password" />
-                  <Label fx:id="lblAdminIDFeedbackRegister" layoutX="24.0" layoutY="67.0" prefWidth="150.0" />
-                  <Label fx:id="lblUserNameFeedbackRegister" layoutX="24.0" layoutY="110.0" prefWidth="150.0" />
+                  <Label fx:id="lblAdminIDFeedbackRegister" layoutY="67.0" prefHeight="25.0" prefWidth="196.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font></Label>
+                  <Label fx:id="lblUserNameFeedbackRegister" layoutX="23.0" layoutY="158.0" prefWidth="150.0" />
                   <Label fx:id="lblPasswordFeedbackRegister" layoutX="24.0" layoutY="158.0" prefWidth="150.0" />
                </children>
             </AnchorPane>

@@ -30,7 +30,7 @@ public class Employee {
 	public Employee() {
 		
 	}
-	public boolean isUniqueEmpNum(String employeeNum) {
+	public static boolean isUniqueEmpNum(String employeeNum) {
 		PreparedStatement empNum;
 		PreparedStatement empNumUser;
 		PreparedStatement insertEmpNum;
