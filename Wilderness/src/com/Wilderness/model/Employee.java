@@ -32,19 +32,24 @@ public class Employee {
 	}
 	public boolean isUniqueEmpNum(String employeeNum) {
 		PreparedStatement empNum;
+		PreparedStatement empNumUser;
 		PreparedStatement insertEmpNum;
+		PreparedStatement insertEmpNum2; //Adding non existant Emp num
 		ResultSet rs;
+		ResultSet rs2;
 		try {
 			empNum = WildernessDBConfig.getConnection().prepareStatement("select employee_num from employee where employee_num = ?");
+			empNumUser = WildernessDBConfig.getConnection().prepareStatement("select emp_num from user where emp_num = ?");
 			insertEmpNum = WildernessDBConfig.getConnection().prepareStatement("INSERT INTO user (emp_num) SELECT employee_num FROM employee where employee_num = ?");
-			empNum.setString(1, employeeNum);
+			empNumUser.setString(1, employeeNum);
 			insertEmpNum.setString(1, employeeNum);
+			empNum.setString(1, employeeNum);
 			rs = empNum.executeQuery();
-		
-		if(rs.next()||!rs.next()) {
-			insertEmpNum.executeUpdate();
+			rs2 = empNumUser.executeQuery();
+		if(!rs2.next()&&rs.next()) {
 			return true;
 		}
+		
 		else {
 			return false;
 		}
