@@ -58,7 +58,6 @@ public class StationEditDialogController {
         TempField.setText(station.getTemp());
         PrecipitationField.setText(station.getPrecipitation());
         Precipitation1Field.setText(Integer.toString(station.getPrecipitation1()));
-        HumidityField.setText(station.getHumidity());
         selectedDateField.setText(DateUtil.format(station.getselectedDate()));
         selectedDateField.setPromptText("dd.mm.yyyy");
     }
@@ -82,7 +81,6 @@ public class StationEditDialogController {
             station.setTemp(TempField.getText());
             station.setPrecipitation(PrecipitationField.getText());
             station.setPrecipitation1(Integer.parseInt(Precipitation1Field.getText()));
-            station.setHumidity(HumidityField.getText());
             station.setselectedDate(DateUtil.parse(selectedDateField.getText()));
 
             okClicked = true;

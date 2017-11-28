@@ -19,7 +19,6 @@ public class Station {
     private final StringProperty windSpeed;
     private final StringProperty Precipitation;
     private final SimpleIntegerProperty Precipitation1;
-    private final StringProperty Humidity;
     private final ObjectProperty<LocalDate> selectedDate;
 
     /**
@@ -46,8 +45,7 @@ public class Station {
         // Some initial data for testing.
         this.Precipitation = new SimpleStringProperty();
         this.Precipitation1 = new SimpleIntegerProperty();
-        this.Humidity = new SimpleStringProperty();
-        this.selectedDate = new SimpleObjectProperty<LocalDate>(LocalDate.of(2017, 11, 9));
+        this.selectedDate = new SimpleObjectProperty<LocalDate>(LocalDate.of(2017, 11, 10));
     }
     public Station(String station, String stationID, String temp, String groundTemp, String pressure, String Precipitation, String windSpeed) {
         this.station = new SimpleStringProperty(station);
@@ -56,12 +54,12 @@ public class Station {
         this.groundTemp = new SimpleStringProperty(groundTemp);
         this.pressure = new SimpleStringProperty(pressure);
         this.windSpeed = new SimpleStringProperty(windSpeed);
+        this.Precipitation = new SimpleStringProperty(Precipitation);
 
         // Some initial data for testing.
-        this.Precipitation = new SimpleStringProperty(Precipitation);
+//        this.Precipitation = new SimpleStringProperty(Precipitation);
         this.Precipitation1 = new SimpleIntegerProperty();
-        this.Humidity = new SimpleStringProperty();
-        this.selectedDate = new SimpleObjectProperty<LocalDate>(LocalDate.of(2017, 11, 9));
+        this.selectedDate = new SimpleObjectProperty<LocalDate>(LocalDate.of(2017, 11, 10));
     }
 
     public String getStation() {
@@ -121,18 +119,6 @@ public class Station {
         return Precipitation1;
     }
 
-    public String getHumidity() {
-        return Humidity.get();
-    }
-
-    public void setHumidity(String i) {
-        this.Humidity.set(i);
-    }
-
-    public StringProperty HumidityProperty() {
-        return Humidity;
-    }
-
     public LocalDate getselectedDate() {
         return selectedDate.get();
     }
@@ -143,6 +129,18 @@ public class Station {
 
     public ObjectProperty<LocalDate> selectedDateProperty() {
         return selectedDate;
+    }
+    public String getWindSpeed() {
+    	return windSpeed.get();
+    }
+    public void setWindSpeed(String windSpeed) {
+    	this.windSpeed.set(windSpeed);
+    }
+    public String getPressure() {
+    	return pressure.get();
+    }
+    public void setPressure(String pressure) {
+    	
     }
 
 	

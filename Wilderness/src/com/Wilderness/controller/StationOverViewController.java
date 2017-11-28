@@ -9,9 +9,7 @@ import application.Main;
 import application.WildernessDBConfig;
 
 import com.Wilderness.model.Station;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
-
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.Wilderness.model.DateUtil;
@@ -63,7 +61,7 @@ public class StationOverViewController {
         // Initialize the station table with the two columns.
         StationColumn.setCellValueFactory(cellData -> cellData.getValue().StationProperty());
         TempColumn.setCellValueFactory(cellData -> cellData.getValue().StationIDProperty());
-        StationTable.setItems(getStationInfo());
+        StationTable.setItems(getStationList());
      // Clear station details.
         showStationDetails(null);
 
@@ -84,20 +82,25 @@ public class StationOverViewController {
         StationTable.setItems(mainApp.getStationData());
     }
     /**
-     * Imports data from the station table in the database, populates the station list.
+     * Imports data from the station table in the database, populates the station list and the station detail.
      * Called during initialization.
      * @return stationList
      */
     public ObservableList<Station> getStationList() {
     	ObservableList<Station> stationList = FXCollections.observableArrayList();
     	PreparedStatement insertStatement;
-    	ResultSet rs;
+    	PreparedStatement insertStationDetails;
+    	ResultSet rs,rs2;
     	try {
     	insertStatement = (PreparedStatement) WildernessDBConfig.getConnection().prepareStatement("select location, station_id from station");
     	rs = insertStatement.executeQuery();
     	while(rs.next()) {
-    		stationList.add(new Station(rs.getString("location").toString(), rs.getString("station_id").toString()));
-    	}
+        	insertStationDetails = WildernessDBConfig.getConnection().prepareStatement("select wind_speed, ground_temp, air_temp, barometric_pressure, rainfall from station_detail where stationID = "+(rs.getString("station_id")));
+        	rs2 = insertStationDetails.executeQuery();
+        	while(rs2.next()) {
+    		stationList.add(new Station(rs.getString("location").toString(), rs.getString("station_id").toString(), rs2.getString("air_temp").toString(), rs2.getString("ground_temp").toString(), rs2.getString("barometric_pressure").toString(), rs2.getString("rainfall").toString(), rs2.getString("wind_speed").toString()));
+        	}
+        	}
 
     	}
     	catch(Exception e) {
@@ -105,22 +108,6 @@ public class StationOverViewController {
     	}
     	return stationList;
     	
-    }
-    public ObservableList<Station> getStationInfo(){
-    	ObservableList<Station> stationInfo = getStationList();
-    	PreparedStatement selectInfo;
-    	ResultSet rs;
-    	try {
-    		selectInfo = (PreparedStatement) WildernessDBConfig.getConnection().prepareStatement("select wind_speed, air_temp, ground_temp, barometric_pressure, rainfall from station_detail where stationID = "+stationInfo.;
-    		rs = selectInfo.executeQuery();
-    		while(rs.next()) {
-    			stationInfo.add(new Station(stationInfo.get(1).toString(),stationInfo.get(2).toString(),rs.getString("air_temp").toString(), rs.getString("ground_temp").toString(), rs.getString("barometric_pressure").toString(), rs.getString("rainfall").toString(), rs.getString("wind_speed").toString()));
-    		}
-    	}
-    	catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    	return stationInfo;
     }
     
     /**
@@ -133,20 +120,21 @@ public class StationOverViewController {
         if (station != null) {
             // Fill the labels with info from the station object.
             StationLabel.setText(station.getStation());
-            //StationIDLabel.setText(station.getStationID());
-//            TempLabel.setText(station.getTemp());
-//            PrecipitationLabel.setText(station.getPrecipitation());
-//            Precipitation1Label.setText(Integer.toString(station.getPrecipitation1()));
-//            PressureLabel.setText(station.getHumidity());
-//
-//            selectedDateLabel.setText(DateUtil.format(station.getselectedDate()));
+            StationIDLabel.setText(station.getStationID());
+            TempLabel.setText(station.getTemp());
+            PrecipitationLabel.setText(station.getPrecipitation());
+            WindSpeedLabel.setText(station.getWindSpeed());
+            PressureLabel.setText(station.getPressure());
+            selectedDateLabel.setText(DateUtil.format(station.getselectedDate()));
         } else {
             // Station is null, remove all the text.
             StationLabel.setText("");
+            StationIDLabel.setText("");
             TempLabel.setText("");
             PrecipitationLabel.setText("");
-            Precipitation1Label.setText("");
-            Precipitation1Label.setText("");
+            WindSpeedLabel.setText("");
+            PressureLabel.setText("");
+//           Precipitation1Label.setText("");
             selectedDateLabel.setText("");
         }
     }
