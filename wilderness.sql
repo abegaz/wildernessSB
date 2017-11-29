@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2017 at 06:54 AM
+-- Generation Time: Nov 29, 2017 at 06:58 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -3781,8 +3781,8 @@ INSERT INTO `student` (`Name`, `Student_number`, `Class`, `Major`) VALUES
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `emp_num` int(11) DEFAULT NULL,
-  `email` varchar(45) NOT NULL,
-  `password` varchar(12) NOT NULL
+  `email` varchar(45) DEFAULT NULL,
+  `password` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
