@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Wilderness.controller.ChartController">
+   <children>
+      <LineChart fx:id="RainfallLineChart" prefHeight="350.0" prefWidth="500.0" title="Rainfall">
+        <xAxis>
+          <CategoryAxis animated="false" label="Day" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Centimeters of Rain" prefHeight="388.0" prefWidth="41.0" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <LineChart fx:id="WindSpeedLineChart" layoutX="500.0" prefHeight="350.0" prefWidth="500.0" title="Wind Speed">
+        <xAxis>
+          <CategoryAxis label="Day" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Speed Km/h" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <LineChart fx:id="PressureLineChart" layoutX="8.0" layoutY="336.0" prefHeight="350.0" prefWidth="500.0" title="Pressure">
+        <xAxis>
+          <CategoryAxis label="Day" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Pressure InHg" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <LineChart fx:id="TemperatureLineChart" layoutX="508.0" layoutY="350.0" prefHeight="350.0" prefWidth="500.0" title="Temperature">
+        <xAxis>
+          <CategoryAxis label="Day" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="Temperature Celsius" side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </children>
+</AnchorPane>
