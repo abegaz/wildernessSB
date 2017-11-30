@@ -23,6 +23,9 @@ public class StationEditDialogController {
     private TextField HumidityField;
     @FXML
     private TextField selectedDateField;
+    @FXML
+    private TextField InsertDateTextField;
+
 
 
     private Stage dialogStage;
@@ -58,7 +61,7 @@ public class StationEditDialogController {
         TempField.setText(station.getTemp());
         PrecipitationField.setText(station.getPrecipitation());
         Precipitation1Field.setText(Integer.toString(station.getPrecipitation1()));
-        selectedDateField.setText(DateUtil.format(station.getselectedDate()));
+        selectedDateField.setText(station.getSelectedDate());
         selectedDateField.setPromptText("dd.mm.yyyy");
     }
 
@@ -81,7 +84,7 @@ public class StationEditDialogController {
             station.setTemp(TempField.getText());
             station.setPrecipitation(PrecipitationField.getText());
             station.setPrecipitation1(Integer.parseInt(Precipitation1Field.getText()));
-            station.setselectedDate(DateUtil.parse(selectedDateField.getText()));
+            station.setSelectedDate(selectedDateField.getText());
 
             okClicked = true;
             dialogStage.close();

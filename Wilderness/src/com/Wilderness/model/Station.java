@@ -14,12 +14,12 @@ public class Station {
     private final StringProperty station;
     private final StringProperty stationID;
     private final StringProperty temp;
-    private final StringProperty groundTemp;
+//    private final StringProperty groundTemp;
     private final StringProperty pressure;
     private final StringProperty windSpeed;
     private final StringProperty Precipitation;
     private final SimpleIntegerProperty Precipitation1;
-    private final ObjectProperty<LocalDate> selectedDate;
+    private final StringProperty selectedDate;
 
     /**
      * Default constructor.
@@ -38,28 +38,29 @@ public class Station {
         this.station = new SimpleStringProperty(station);
         this.stationID = new SimpleStringProperty(stationID);
         this.temp = new SimpleStringProperty();
-        this.groundTemp = new SimpleStringProperty();
+//        this.groundTemp = new SimpleStringProperty();
         this.pressure = new SimpleStringProperty();
         this.windSpeed = new SimpleStringProperty();
 
         // Some initial data for testing.
         this.Precipitation = new SimpleStringProperty();
         this.Precipitation1 = new SimpleIntegerProperty();
-        this.selectedDate = new SimpleObjectProperty<LocalDate>(LocalDate.of(2017, 11, 10));
+        this.selectedDate = new SimpleStringProperty();
     }
-    public Station(String station, String stationID, String temp, String groundTemp, String pressure, String Precipitation, String windSpeed) {
+    public Station(String station, String stationID, String temp, String pressure, String Precipitation, String windSpeed, String selectedDate) {
         this.station = new SimpleStringProperty(station);
         this.stationID = new SimpleStringProperty(stationID);
         this.temp = new SimpleStringProperty(temp);
-        this.groundTemp = new SimpleStringProperty(groundTemp);
+//        this.groundTemp = new SimpleStringProperty(groundTemp);
         this.pressure = new SimpleStringProperty(pressure);
         this.windSpeed = new SimpleStringProperty(windSpeed);
         this.Precipitation = new SimpleStringProperty(Precipitation);
+        this.selectedDate = new SimpleStringProperty(selectedDate);
 
         // Some initial data for testing.
 //        this.Precipitation = new SimpleStringProperty(Precipitation);
         this.Precipitation1 = new SimpleIntegerProperty();
-        this.selectedDate = new SimpleObjectProperty<LocalDate>(LocalDate.of(2017, 11, 10));
+//        this.selectedDate = new SimpleObjectProperty<LocalDate>(LocalDate.of(2017, 11, 10));
     }
 
     public String getStation() {
@@ -119,15 +120,15 @@ public class Station {
         return Precipitation1;
     }
 
-    public LocalDate getselectedDate() {
+    public String getSelectedDate() {
         return selectedDate.get();
     }
 
-    public void setselectedDate(LocalDate selectedDate) {
+    public void setSelectedDate(String selectedDate) {
         this.selectedDate.set(selectedDate);
     }
 
-    public ObjectProperty<LocalDate> selectedDateProperty() {
+    public StringProperty selectedDateProperty() {
         return selectedDate;
     }
     public String getWindSpeed() {
